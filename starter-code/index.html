@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Frontend quiz app</title>
 </head>
+
 <body>
+  <header>
+    <h3 id="quizz_spec">
+      <div>
+        <img src="assets/images/icon-sun-light.svg" alt="sun icon them switcher">
+        <button>
+          <span></span>
+        </button>
+        <img src="assets/images/icon-moon-light.svg" alt="moon icon them switcher">
+    </h3>
+    </div>
+  </header>
 
-  <!-- Quiz menu start -->
-
-  Welcome to the Frontend Quiz!
-  Pick a subject to get started.
-
-  HTML
-  CSS
-  JavaScript
-  Accessibility
-
-  <!-- Quiz menu end -->
-
-  <!-- Quiz question start -->
-
-  Question <!-- number --> of 10
-
-  A
-  B
-  C
-  D
-
-  Submit answer
-
-  <!-- Quiz question end -->
-
-  <!-- Quiz completed start -->
-
-  Quiz completed
-  You scored...
-
-  <!-- score --> out of 10
-
-  <!-- Quiz completed end -->
-
+  <main class="home">
+    <div>
+      <h1>Welcome to the <strong>Frontend Quiz!</strong></h1>
+      <p>Pick a subject to get started.</p>
+    </div>
+    <aside>
+      <ul>
+        <li>
+          <button id="html">
+            HTML
+          </button>
+        </li>
+        <li>
+          <button id="css">
+            CSS
+          </button>
+        </li>
+        <li>
+          <button id="js">
+            Javascript
+          </button>
+        </li>
+        <li>
+          <button id="accessibility">
+            Accessibility
+          </button>
+        </li>
+      </ul>
+    </aside>
+  </main>
 </body>
+
 </html>
