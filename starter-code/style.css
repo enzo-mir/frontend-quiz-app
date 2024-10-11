@@ -1,0 +1,225 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Rubik-light";
+  src: url("./assets/fonts/static/Rubik-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Rubik";
+  src: url("./assets/fonts/static/Rubik-regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Rubik-medium";
+  src: url("./assets/fonts/static/Rubik-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Rubik-italic";
+  src: url("./assets/fonts/static/Rubik-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: normal;
+}
+
+:root {
+  --display: 144px;
+  --heading--l--bold: 64px;
+  --heading--l--regular: clamp(40px, 5vw, 64px);
+  --heading--m: 36px;
+  --heading--s: clamp(20px, 4vw, 28px);
+  --body--m: 24px;
+  --body--s: 20px;
+
+  --ff-reg: "Rubik";
+  --ff-med: "Rubik-medium";
+  --ff-it: "Rubik-italic";
+  --ff-light: "Rubik-light";
+
+  --purple: #a729f5;
+  --purewhite: #ffffff;
+  --darknavy: #313e51;
+  --greynavy: #626c7f;
+  --lightgrey: #f4f6fa;
+  --navy: #3b4d66;
+  --lightbluish: #abc1e1;
+  --green: #26d782;
+  --red: #ee5454;
+}
+ul {
+  list-style-type: none;
+}
+
+button {
+  background: unset;
+  border: none;
+  cursor: pointer;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 25% 1fr;
+  place-items: center;
+  background-image: url(./assets/images/pattern-background-desktop-light.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: var(--ff-reg);
+}
+
+/* ---------------------HEADER-------------------------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(700px, 80%, 1200px);
+}
+
+#theme_switcher {
+  display: grid;
+  grid-template-columns: auto 48px auto;
+  grid-template-rows: 24px;
+  gap: 1em;
+}
+
+#theme_switcher button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--purple);
+  border-radius: 50px;
+  padding: 0.25em;
+}
+#theme_switcher button span {
+  display: block;
+  background-color: var(--purewhite);
+  height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2em;
+  height: 100%;
+  width: clamp(700px, 80%, 1200px);
+}
+
+main > div {
+  width: 100%;
+  display: grid;
+  gap: 3em;
+}
+
+main > aside {
+  width: 100%;
+}
+
+main h1 {
+  font-family: var(--ff-light);
+  font-weight: 300;
+  font-size: var(--heading--l--regular);
+  text-wrap: nowrap;
+}
+
+#quiz_selection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#quiz_selection button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: var(--heading--s);
+  padding: 20px;
+  border-radius: 18px;
+  gap: 2em;
+}
+
+#quiz_selection button div {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.5em;
+}
+#quiz_selection button#html div {
+  background-color: #fff1e9;
+}
+#quiz_selection button#css div {
+  background-color: #e0fdef;
+}
+
+#quiz_selection button#js div {
+  background-color: #ebf0ff;
+}
+
+#quiz_selection button#accessibility div {
+  background-color: #f6e7ff;
+}
+
+#quiz_selection > li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 18px;
+  background-color: var(--purewhite);
+  box-shadow: 0 16px 40px 0 #8fa0c124;
+}
+
+/* --------------BREAKPOINTS----------------------------- */
+
+@media screen and (max-width: 1000px) {
+  body {
+    grid-template-rows: 10% 1fr;
+    gap: 2em;
+  }
+  main,
+  header {
+    width: clamp(0px, 80%, 1200px);
+  }
+  main {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5svh;
+  }
+
+  main > div {
+    gap: 1em;
+  }
+}
+
+@media screen and (max-height: 750px) {
+  #quiz_selection > li {
+    height: 75px;
+  }
+
+  #quiz_selection button div {
+    width: 40px;
+    padding: 5px;
+  }
+  #quiz_selection button div img {
+    width: 100%;
+  }
+}

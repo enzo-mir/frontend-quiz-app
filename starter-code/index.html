@@ -1,58 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <title>Frontend Mentor | Frontend quiz app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-
-  <title>Frontend Mentor | Frontend quiz app</title>
-</head>
-
-<body>
-  <header>
-    <h3 id="quizz_spec">
-      <div>
-        <img src="assets/images/icon-sun-light.svg" alt="sun icon them switcher">
+  <body>
+    <header>
+      <h3 id="quizz_spec"></h3>
+      <div id="theme_switcher">
+        <img src="assets/images/icon-sun-dark.svg" alt="sun icon them switcher" />
         <button>
           <span></span>
         </button>
-        <img src="assets/images/icon-moon-light.svg" alt="moon icon them switcher">
-    </h3>
-    </div>
-  </header>
+        <img src="assets/images/icon-moon-dark.svg" alt="moon icon them switcher" />
+      </div>
+    </header>
 
-  <main class="home">
-    <div>
-      <h1>Welcome to the <strong>Frontend Quiz!</strong></h1>
-      <p>Pick a subject to get started.</p>
-    </div>
-    <aside>
-      <ul>
-        <li>
-          <button id="html">
-            HTML
-          </button>
-        </li>
-        <li>
-          <button id="css">
-            CSS
-          </button>
-        </li>
-        <li>
-          <button id="js">
-            Javascript
-          </button>
-        </li>
-        <li>
-          <button id="accessibility">
-            Accessibility
-          </button>
-        </li>
-      </ul>
-    </aside>
-  </main>
-</body>
-
+    <main class="home">
+      <div>
+        <h1>
+          Welcome to the<br />
+          <strong>Frontend Quiz!</strong>
+        </h1>
+        <p>Pick a subject to get started.</p>
+      </div>
+      <aside>
+        <ul id="quiz_selection">
+          <li>
+            <button id="html">
+              <div>
+                <img src="./assets/images/icon-html.svg" alt="html icon" />
+              </div>
+              HTML
+            </button>
+          </li>
+          <li>
+            <button id="css">
+              <div>
+                <img src="./assets/images/icon-css.svg" alt="css icon" />
+              </div>
+              CSS
+            </button>
+          </li>
+          <li>
+            <button id="js">
+              <div>
+                <img src="./assets/images/icon-js.svg" alt="javascript icon" />
+              </div>
+              Javascript
+            </button>
+          </li>
+          <li>
+            <button id="accessibility">
+              <div>
+                <img src="./assets/images/icon-accessibility.svg" alt="accessibility icon" />
+              </div>
+              Accessibility
+            </button>
+          </li>
+        </ul>
+      </aside>
+    </main>
+  </body>
 </html>
