@@ -4,6 +4,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  color: var(--darknavy);
+  transition-property: color, background-color, background-image;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
 }
 
 @font-face {
@@ -54,7 +58,12 @@
   --lightbluish: #abc1e1;
   --green: #26d782;
   --red: #ee5454;
+
+  --bg-img-s: url("./assets/images/pattern-background-mobile-light.svg");
+  --bg-img-m: url("./assets/images/pattern-background-tablet-light.svg");
+  --bg-img-l: url("./assets/images/pattern-background-desktop-light.svg");
 }
+
 ul {
   list-style-type: none;
 }
@@ -75,11 +84,12 @@ body {
   display: grid;
   grid-template-rows: 25% 1fr;
   place-items: center;
-  background-image: url(./assets/images/pattern-background-desktop-light.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   font-family: var(--ff-reg);
+  background-image: var(--bg-img-l);
+  background-color: var(--purewhite);
 }
 
 /* ---------------------HEADER-------------------------- */
@@ -107,9 +117,13 @@ header {
   padding: 0.25em;
 }
 #theme_switcher button span {
+  --padding: 4px;
+  position: absolute;
+  top: var(--padding);
+  left: var(--padding);
   display: block;
-  background-color: var(--purewhite);
-  height: 100%;
+  background-color: white;
+  height: calc(100% - var(--padding) * 2);
   border-radius: 50%;
   aspect-ratio: 1 / 1;
 }
@@ -188,12 +202,48 @@ main h1 {
   box-shadow: 0 16px 40px 0 #8fa0c124;
 }
 
+/* --------------------THEME PREFER-------------------------*/
+body[data-theme="dark"] {
+  box-shadow: 0 16px 40px 0 hsla(216, 25%, 25%, 0.14);
+
+  #theme_switcher button span {
+    left: 100%;
+    translate: calc(-100% - 4px);
+  }
+}
+
+:root:has(body[data-theme="dark"]) {
+  color-scheme: dark;
+  --purewhite: #313e51;
+  --darknavy: #ffffff;
+  --bg-img-s: url("./assets/images/pattern-background-mobile-dark.svg");
+  --bg-img-m: url("./assets/images/pattern-background-tablet-light.svg");
+  --bg-img-l: url("./assets/images/pattern-background-desktop-dark.svg");
+}
+:root:has(body[data-theme="white"]) {
+  color-scheme: light;
+  --purple: #a729f5;
+  --purewhite: #ffffff;
+  --darknavy: #313e51;
+  --greynavy: #626c7f;
+  --lightgrey: #f4f6fa;
+  --navy: #3b4d66;
+  --lightbluish: #abc1e1;
+  --green: #26d782;
+  --red: #ee5454;
+
+  --bg-img-s: url("./assets/images/pattern-background-mobile-light.svg");
+  --bg-img-m: url("./assets/images/pattern-background-tablet-light.svg");
+  --bg-img-l: url("./assets/images/pattern-background-desktop-light.svg");
+}
+
 /* --------------BREAKPOINTS----------------------------- */
 
 @media screen and (max-width: 1000px) {
   body {
     grid-template-rows: 10% 1fr;
     gap: 2em;
+    background-image: var(--bg-img-m);
   }
   main,
   header {
@@ -211,6 +261,9 @@ main h1 {
 }
 
 @media screen and (max-height: 750px) {
+  body {
+    background-image: var(--bg-img-s);
+  }
   #quiz_selection > li {
     height: 75px;
   }
