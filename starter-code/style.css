@@ -5,7 +5,7 @@
   margin: 0;
   box-sizing: border-box;
   color: var(--darknavy);
-  transition-property: color, background-color, background-image;
+  transition-property: color, background-color, background-image, left, translate;
   transition-duration: 0.15s;
   transition-timing-function: ease-out;
 }
@@ -39,7 +39,7 @@
   --display: 144px;
   --heading--l--bold: 64px;
   --heading--l--regular: clamp(40px, 5vw, 64px);
-  --heading--m: 36px;
+  --heading--m: clamp(30px, 4.5, 36px);
   --heading--s: clamp(20px, 4vw, 28px);
   --body--m: 24px;
   --body--s: 20px;
@@ -92,7 +92,7 @@ body {
   background-color: var(--purewhite);
 }
 
-/* ---------------------HEADER-------------------------- */
+/* --------------------- HEADER -------------------------- */
 
 header {
   display: flex;
@@ -101,6 +101,31 @@ header {
   width: clamp(700px, 80%, 1200px);
 }
 
+#quiz_spec {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+#quiz_spec > div {
+  display: grid;
+  place-items: center;
+  border-radius: 0.5em;
+  width: 56px;
+  aspect-ratio: 1 / 1;
+  &.html {
+    background-color: #fff1e9;
+  }
+  &.css {
+    background-color: #e0fdef;
+  }
+  &.javascript {
+    background-color: #ebf0ff;
+  }
+  &.accessibility {
+    background-color: #f6e7ff;
+  }
+}
 #theme_switcher {
   display: grid;
   grid-template-columns: auto 48px auto;
@@ -132,9 +157,13 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2em;
+  gap: 5em;
   height: 100%;
   width: clamp(700px, 80%, 1200px);
+}
+
+main.quiz h3 {
+  font-size: var(--heading--m);
 }
 
 main > div {
@@ -142,11 +171,167 @@ main > div {
   display: grid;
   gap: 3em;
 }
+main > div.questions {
+  grid-template-rows: auto 1fr auto;
+  height: clamp(200px, 60%, 80%);
+}
+
+.progress_bar {
+  position: relative;
+  width: 100%;
+  height: 1em;
+  background-color: var(--navy);
+  border-radius: 20px;
+  padding: 4px;
+}
+
+.progress_bar > span {
+  display: block;
+  border-radius: 20px;
+  height: 100%;
+  background-color: var(--purple);
+}
 
 main > aside {
   width: 100%;
 }
+aside.answere {
+  display: grid;
+  gap: 1.5em;
+}
+aside.answere ul {
+  display: grid;
+  gap: 1.5em;
+  width: 100%;
+}
+aside.answere ul li {
+  position: relative;
+  width: 100%;
+  height: 92px;
+  border-radius: 18px;
+  background-color: var(--purewhite);
+  box-shadow: 0 16px 40px 0 #8fa0c124;
+  font-weight: bold;
+  transition: all ease-out 0.2s;
+  outline: 2px solid transparent;
+}
 
+body main > aside.answere ul li button:hover > span,
+body main > aside.answere ul li button:focus-visible > span,
+body main > aside.answere ul li:has(button.selected) > button > span {
+  color: var(--purple);
+  background-color: #f6e7ff;
+}
+aside.answere ul li button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  font-size: var(--heading--m);
+}
+aside.answere ul li button span {
+  display: grid;
+  place-items: center;
+  font-size: larger;
+  background-color: var(--lightgrey);
+  border-radius: 0.5em;
+  width: 56px;
+  height: 56px;
+  height: 100%;
+}
+aside.answere ul li:has(button.selected) {
+  outline: 2px solid var(--purple);
+}
+body > main aside.answere ul li:has(button.valid) span {
+  color: white;
+  background-color: var(--green);
+}
+aside.answere ul li:has(button.valid) {
+  outline: 2px solid var(--green);
+}
+aside.answere ul li:has(button.valid)::after,
+aside.answere ul li:has(button.answere_valid)::after {
+  position: absolute;
+  content: "";
+  right: 20px;
+  top: 50%;
+  translate: 0 -50%;
+  background-position: center;
+  background-size: contain;
+  background: url(./assets/images/icon-correct.svg);
+  width: 40px;
+  height: 40px;
+}
+
+aside.answere ul li:has(button.invalid)::after {
+  position: absolute;
+  content: "";
+  right: 20px;
+  top: 50%;
+  translate: 0 -50%;
+  background-position: center;
+  background-size: contain;
+  background: url(./assets/images/icon-incorrect.svg);
+  width: 40px;
+  height: 40px;
+}
+
+.error_message {
+  position: relative;
+  padding-inline: 30px;
+  justify-self: center;
+}
+.error_message::before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  content: '';
+  height: 25px;
+  width: 25px;
+  background-image: url(./assets/images/icon-error.svg);
+  background-size: contain;
+  background-position: center;
+}
+
+body > main aside.answere ul li:has(button.invalid) span {
+  color: white;
+  background-color: var(--red);
+}
+aside.answere ul li:has(button.invalid) {
+  outline: 2px solid var(--red);
+}
+
+#submit_button {
+  position: relative;
+  width: 100%;
+  height: 92px;
+  background-color: var(--purple);
+  color: white;
+  font-size: var(--heading--s);
+  border-radius: 18px;
+}
+
+#submit_button::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all ease-out 0.1s;
+  opacity: 0;
+  border-radius: 18px;
+}
+
+#submit_button:focus-visible::after,
+#submit_button:hover::after {
+  opacity: 1;
+}
 main h1 {
   font-family: var(--ff-light);
   font-weight: 300;
@@ -202,13 +387,22 @@ main h1 {
   box-shadow: 0 16px 40px 0 #8fa0c124;
 }
 
-/* --------------------THEME PREFER-------------------------*/
+/* --------------------THEME PREFERENCE-------------------------*/
 body[data-theme="dark"] {
-  box-shadow: 0 16px 40px 0 hsla(216, 25%, 25%, 0.14);
-
   #theme_switcher button span {
     left: 100%;
     translate: calc(-100% - 4px);
+  }
+  aside.answere ul li button span {
+    color: var(--greynavy);
+    font-weight: bold;
+  }
+}
+
+body[data-theme="light"] {
+  background-color: var(--lightgrey);
+  .progress_bar {
+    background-color: var(--purewhite);
   }
 }
 
@@ -217,21 +411,10 @@ body[data-theme="dark"] {
   --purewhite: #313e51;
   --darknavy: #ffffff;
   --bg-img-s: url("./assets/images/pattern-background-mobile-dark.svg");
-  --bg-img-m: url("./assets/images/pattern-background-tablet-light.svg");
+  --bg-img-m: url("./assets/images/pattern-background-tablet-dark.svg");
   --bg-img-l: url("./assets/images/pattern-background-desktop-dark.svg");
 }
-:root:has(body[data-theme="white"]) {
-  color-scheme: light;
-  --purple: #a729f5;
-  --purewhite: #ffffff;
-  --darknavy: #313e51;
-  --greynavy: #626c7f;
-  --lightgrey: #f4f6fa;
-  --navy: #3b4d66;
-  --lightbluish: #abc1e1;
-  --green: #26d782;
-  --red: #ee5454;
-
+:root:has(body[data-theme="light"]) {
   --bg-img-s: url("./assets/images/pattern-background-mobile-light.svg");
   --bg-img-m: url("./assets/images/pattern-background-tablet-light.svg");
   --bg-img-l: url("./assets/images/pattern-background-desktop-light.svg");
