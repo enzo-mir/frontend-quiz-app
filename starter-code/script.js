@@ -94,7 +94,7 @@ function submitAnswere() {
     answereChoosed = null
     answereSubmited = false
     trueAnswer && score--
-    numberQuestion += 1
+    numberQuestion += 1 
     errorMessage =null
     updateAnswereSide(currentQuiz)
     updateQuestionSide(currentQuiz)
@@ -110,14 +110,13 @@ function submitAnswere() {
 function selectChoice() {
     const buttons = document.querySelectorAll('aside.answere ul li button');
     let previouslySelected = null; 
-    
-    buttons.forEach((button) => { 
-      button.addEventListener('click', (e) => {
-        document.querySelector('p.error_message') &&( errorMessage = false,choiceMissing())
-
-    if(answereSubmited) return
-
-        if (previouslySelected) {
+      buttons.forEach((button) => { 
+        button.addEventListener('click', (e) => {
+          document.querySelector('p.error_message') &&( errorMessage = false,choiceMissing())
+          
+          if(answereSubmited) return
+          
+          if (previouslySelected) {
           previouslySelected.classList.remove('selected');
         }
         e.currentTarget.classList.add('selected');
@@ -127,10 +126,36 @@ function selectChoice() {
     });
 }
 
+function finalCase() {
+  main.removeAttribute('class')
+  main.classList.add('result')
+  const wrapper = document.createElement('div')
+  wrapper.classList.add('final_case')
+  questionSide.innerHTML = '<h1>Quiz completed</br><strong>Your scored...</strong></h>'
+  const resultCase = `
+  <div>
+  <div class="${currentQuiz.title.toLowerCase()}">
+    <img src="${currentQuiz.icon}">
+  </div>
+    <p>${currentQuiz.title}</p>
+  </div>
+  <span>${score}</span>
+  <p>out of ${currentQuiz.questions.length}</p>
+  `
+  wrapper.innerHTML = resultCase
+  const button = document.createElement('button')
+  button.textContent = "Play again"
+  button.addEventListener('click', ()=> window.location.reload() )
+  
+  answereSide.innerHTML = wrapper.outerHTML
+  answereSide.append(button)
+  
+}
+
 
 function updateAnswereSide(quiz) {
+  
   selectChoice()
-
     answereSide.innerHTML = null
     let answeres = quiz.questions[numberQuestion - 1].options
     const wrapper = document.createElement('ul')
@@ -153,25 +178,33 @@ function updateAnswereSide(quiz) {
     submitButton.id = "submit_button"
     if(!answereChoosed) {
       submitButton.innerHTML = 'Submit Answer'
-      submitButton.addEventListener('click', submitAnswere)
+      console.table([
+        numberQuestion,
+        currentQuiz.questions.length
+      ])
+      if(numberQuestion === currentQuiz.questions.length) {
+        submitButton.addEventListener('click', finalCase)
+
+      } else {
+
+        submitButton.addEventListener('click', submitAnswere)
+      }
     }
     answereSide.append(submitButton)
-
-
 }
 
 function quizStart(quiz) {
   numberQuestion = 1
   currentQuiz = quiz
-    main.removeAttribute('class')
-    main.classList.add('quiz')
-    updateHeader(quiz.icon, quiz.title)
-    updateQuestionSide(quiz)
-    updateAnswereSide(quiz)
-    selectChoice()
-
-
-    createProgressBar(quiz.questions.length)
+  main.removeAttribute('class')
+  main.classList.add('quiz')
+  updateHeader(quiz.icon, quiz.title)
+  updateQuestionSide(quiz)
+  updateAnswereSide(quiz)
+  selectChoice()
+  
+  
+  createProgressBar(quiz.questions.length)
     
 }
 
