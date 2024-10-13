@@ -202,13 +202,12 @@ function quizStart(quiz) {
   updateQuestionSide(quiz)
   updateAnswereSide(quiz)
   selectChoice()
-  
-  
   createProgressBar(quiz.questions.length)
     
 }
-
 document.addEventListener("DOMContentLoaded", () => {
+  const theme = localStorage.getItem('theme')
+  if(theme) return document.body.dataset.theme = theme;
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     document.body.dataset.theme = "dark";
   } else {
@@ -217,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 themeSwitcher.addEventListener("click", (e) => {
-  document.body.dataset.theme = document.body.dataset.theme === "dark" ? "light" : "dark";
+  const theme = document.body.dataset.theme === "dark" ? "light" : "dark"
+  document.body.dataset.theme = theme;
+  window.localStorage.setItem("theme", theme)
 });
 
 quizButton.html.addEventListener('click',()=> quizStart(data.quizzes[0]))
