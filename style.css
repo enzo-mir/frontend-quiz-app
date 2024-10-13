@@ -11,28 +11,10 @@
 }
 
 @font-face {
-  font-family: "Rubik-light";
-  src: url("./assets/fonts/static/Rubik-Light.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 300;
-}
-@font-face {
   font-family: "Rubik";
-  src: url("./assets/fonts/static/Rubik-regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Rubik-medium";
-  src: url("./assets/fonts/static/Rubik-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Rubik-italic";
-  src: url("./assets/fonts/static/Rubik-Italic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: normal;
+  src: url("./assets/fonts/static/Rubik-Light.ttf") format("truetype"), url("./assets/fonts/static/Rubik-Medium.ttf"), format("truetype"),
+    url("./assets/fonts/static/Rubik-regular.ttf") format("truetype"), url("./assets/fonts/static/Rubik-Italic.ttf") format("truetype");
+  font-display: swap;
 }
 
 :root {
@@ -46,9 +28,6 @@
   --body--s: 20px;
 
   --ff-reg: "Rubik";
-  --ff-med: "Rubik-medium";
-  --ff-it: "Rubik-italic";
-  --ff-light: "Rubik-light";
 
   --purple: #a729f5;
   --purewhite: #ffffff;
@@ -86,6 +65,8 @@ body {
   background-position: center;
   background-size: cover;
   font-family: var(--ff-reg);
+  font-weight: 400;
+
   background-image: var(--bg-img-l);
   padding-block: calc(5svh + 50px);
 }
