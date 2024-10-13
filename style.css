@@ -65,10 +65,8 @@ body {
   background-position: center;
   background-size: cover;
   font-family: var(--ff-reg);
-  font-weight: 400;
-
   background-image: var(--bg-img-l);
-  padding-block: calc(5svh + 50px);
+  padding-block: 20px calc(5svh + 50px);
 }
 
 /* --------------------- HEADER -------------------------- */
