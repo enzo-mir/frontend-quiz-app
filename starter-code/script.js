@@ -89,19 +89,24 @@ function submitAnswere() {
     buttons.forEach((button) =>  button.querySelector('p').innerText === currentQuiz.questions[numberQuestion - 1].answer ? button.classList.add('answere_valid') : null );
 
   }
-  submitButton.innerHTML = "Next Question"
-  submitButton.addEventListener('click', ()=>{
-    answereChoosed = null
-    answereSubmited = false
-    trueAnswer && score--
-    numberQuestion += 1 
-    errorMessage =null
-    updateAnswereSide(currentQuiz)
-    updateQuestionSide(currentQuiz)
-    selectChoice()
-    createProgressBar(currentQuiz.questions.length)
-  })
+  if(numberQuestion === currentQuiz.questions.length) {
+    submitButton.innerHTML = "See Result"
+    submitButton.addEventListener('click', finalCase)
 
+  } else {
+    submitButton.innerHTML = "Next Question"
+    submitButton.addEventListener('click', ()=>{
+      answereChoosed = null
+      answereSubmited = false
+      trueAnswer && score--
+      numberQuestion += 1 
+      errorMessage =null
+      updateAnswereSide(currentQuiz)
+      updateQuestionSide(currentQuiz)
+      selectChoice()
+      createProgressBar(currentQuiz.questions.length)
+    })
+  }
 } catch (error) {
   errorMessage = true
   choiceMissing()
@@ -127,6 +132,17 @@ function selectChoice() {
 }
 
 function finalCase() {
+  if(score !== 0) {
+    
+    const scoreStored = window.localStorage.getItem(`best_${currentQuiz.title.toLowerCase()}_score`)
+    if(scoreStored) {
+      if(Number.parseInt(scoreStored) < score ) {
+        window.localStorage.setItem(`best_${currentQuiz.title.toLowerCase()}_score`, score)
+      } 
+    } else {
+      window.localStorage.setItem(`best_${currentQuiz.title.toLowerCase()}_score`, score)
+    }
+  } 
   main.removeAttribute('class')
   main.classList.add('result')
   const wrapper = document.createElement('div')
@@ -154,7 +170,6 @@ function finalCase() {
 
 
 function updateAnswereSide(quiz) {
-  
   selectChoice()
     answereSide.innerHTML = null
     let answeres = quiz.questions[numberQuestion - 1].options
@@ -182,13 +197,7 @@ function updateAnswereSide(quiz) {
         numberQuestion,
         currentQuiz.questions.length
       ])
-      if(numberQuestion === currentQuiz.questions.length) {
-        submitButton.addEventListener('click', finalCase)
-
-      } else {
-
         submitButton.addEventListener('click', submitAnswere)
-      }
     }
     answereSide.append(submitButton)
 }
@@ -202,10 +211,25 @@ function quizStart(quiz) {
   updateQuestionSide(quiz)
   updateAnswereSide(quiz)
   selectChoice()
-  createProgressBar(quiz.questions.length)
-    
+  createProgressBar(quiz.questions.length)   
 }
+
+function getHighestScore() {
+  data.quizzes.map((quiz)=>{
+    const scored = localStorage.getItem(`best_${quiz.title.toLocaleLowerCase()}_score`)
+    if(scored) {
+        const button = quizButton[quiz.title.toLocaleLowerCase()]
+        const span = document.createElement('span')
+        span.textContent = `Highest score : ${scored}`    
+        button.append(span)  
+    }
+
+  })
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
+  getHighestScore()
   const theme = localStorage.getItem('theme')
   if(theme) return document.body.dataset.theme = theme;
   if (window.matchMedia("(prefers-color-scheme: dark)").matches) {

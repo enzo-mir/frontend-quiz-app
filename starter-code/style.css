@@ -359,6 +359,7 @@ main h1 {
 }
 
 #quiz_selection button {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -397,6 +398,13 @@ main h1 {
   width: 100%;
   border-radius: 18px;
   background-color: var(--purewhite);
+}
+
+#quiz_selection li button span {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: small;
 }
 
 aside:has(.final_case) {
